@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        table, th, td {
+            border: 1px solid rgb(169, 169, 169);
+            border-collapse: collapse;
+            padding: 5px;
+
+            
+        }
+        th{
+            background-color: white;
+        }
+        .t1{
+            text-align: center;
+            margin: auto;
+            width: 400px;
+            height: 50px;
+            
+        }
+        th {
+            background-color:grey;
+            color: white;
+        }
+        tr{
+            
+            color:black;
+        }
+        .delete-btn {
+            background-color: red;
+            color:white;
+            cursor: pointer;
+        }
+        form,h1,h2{
+            text-align: center;
+        }
+        
+        #course{
+            border-color:darkgrey;
+            
+        }
+        #mark{
+            border-color: darkgrey;
+            
+        }
+        #date{
+            border-color:darkgrey;
+            
+        }
+        body{
+            background-image: url(bg-.jpg);
+        }
+        .b1:hover{
+            background-color: grey;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+    <h1 style="color: black;">To-Do List</h1>
+    <form id="todoForm">
+        <label for="course" style="color: black;"><h2>Course:</h2></label>
+        <input type="text" id="course" name="course" required>
+        <br><br>
+        <label for="mark" style="color: black;"><h2>Mark:</h2></label>
+        <input type="number" id="mark" name="mark" required>
+        <br><br>
+        <label for="date" style="color: black;"><h2>Date:</h2></label>
+        <input type="date" id="date" name="date" required>
+        <br><br>
+        <button type="submit" class="b1">Submit</button>
+    </form>
+
+    <h1 style="color: black;">Entries</h1>
+    <table id="entriesTable" class="t1">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Mark</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('todoForm');
+    const tableBody = document.querySelector('#entriesTable tbody');
+    
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+     
+        const course = document.getElementById('course').value;
+        const mark = document.getElementById('mark').value;
+        const date = document.getElementById('date').value;
+
+        const row = document.createElement('tr');
+
+        const courseCell = document.createElement('td');
+        courseCell.textContent = course;
+        row.appendChild(courseCell);
+
+        const markCell = document.createElement('td');
+        markCell.textContent = mark;
+        row.appendChild(markCell);
+
+        const dateCell = document.createElement('td');
+        dateCell.textContent = date;
+        row.appendChild(dateCell);
+
+        const actionCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'delete-btn';
+        deleteButton.addEventListener('click', () => {
+            tableBody.removeChild(row);
+        });
+        actionCell.appendChild(deleteButton);
+        row.appendChild(actionCell);
+
+        
+        tableBody.appendChild(row);
+
+        form.reset();
+    });
+});
+
+    </script>
+</body>
+</html>
